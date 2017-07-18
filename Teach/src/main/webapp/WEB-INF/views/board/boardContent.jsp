@@ -13,18 +13,17 @@
 
 <!-- Bootstrap Core CSS -->
 <link href="res/css/bootstrap.min.css" rel="stylesheet">
+
 <!-- Custom CSS -->
 <link href="res/css/blog-post.css" rel="stylesheet">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-<style>
-.btn-group-lg>.btn, .btn-lg.test{padding:10px; font-size: 18px; line-height: 1.3333333; border-radius:6px;}
 
-</style>
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
 	window.onload = function() {
@@ -35,7 +34,6 @@
 									.click(
 											function() {
 												if (confirm("삭제하시겠습니까?") == true) {
-
 													$("#frm").prop("method",
 															"POST");
 													$("#frm")
@@ -67,7 +65,32 @@
 						});
 	};
 </script>
+<style>
+html {
+	position: relative;
+	min-height: 100%;
+}
 
+.container.test {
+	padding-bottom: 30px;
+}
+
+.btn-group-lg>.btn, .btn-lg.test {
+	padding: 10px 10px 10px 10px;
+	font-size: 18px;
+	line-height: 1.3333333;
+	border-radius: 6px;
+}
+
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	background-color: #222222;
+}
+</style>
 </head>
 <body>
 	<!-- Navigation -->
@@ -101,84 +124,87 @@
 	<!-- Page Content -->
 	<div class="container test">
 		<div class="row">
-			<!-- Blog Post Content Column -->
-			<div class="col-lg-8">
-				<!-- Blog Post -->
-				<!-- Title -->
+			<!--Blog Post Content Column-->
+			<div class="col-lg-12">
+				<!--Blog Post-->
+				<!--Title-->
 				<h1>[${board.lecture}] ${board.title}</h1>
-				<!-- Author -->
+				<!--Author-->
 				<p class="lead" style="text-align: right">
 					<small> &nbsp; &nbsp; </small>
 				</p>
 				<hr>
-				<!-- Date/Time -->
+				<!--Date/Time-->
 				<p>
 					<span class="glyphicon glyphicon-time"></span> 작성일 : ${board.date}
 				</p>
 
 				<hr>
-				<!-- Preview Image -->
+				<!--Preview Image-->
 				<img class="img-responsive" src="" alt="">
 				<hr>
-				<!-- Post Content -->
+				<!--Post Content-->
 				<p class="lead">
 				<p>${board.content}</p>
 				<hr>
 
-				<!-- Blog Comments -->
+				<!--Blog Comments-->
 
 
-				<!-- Posted Comments -->
+				<!--Posted Comments-->
 
 				<form id="frm">
 
-					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-						<input type="button" class="btn btn-default btn-lg btn-block test"  id="btnlist" value="목록으로">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+						<input type="button" class="btn btn-default btn-lg btn-block test"
+							id="btnlist" value="목록으로">
 					</div>
-					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-						<input type="button" class="btn btn-danger btn-lg btn-block test"  id="btndel" value="삭제하기">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+						<input type="button" class="btn btn-danger btn-lg btn-block test"
+							id="btndel" value="삭제하기">
 					</div>
-					<div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
-						<input type="button" class="btn btn-warning btn-lg btn-block test"  id="btnedit" value="수정하기">
+					<div class="col-lg-2 col-md-2 col-sm-3 col-xs-12">
+						<input type="button" class="btn btn-warning btn-lg btn-block test"
+							id="btnedit" value="수정하기">
 					</div>
-					
+
 					<input type="hidden" name="num" value="#">
 
 				</form>
 
 
-				<!-- Blog Sidebar Widgets Column -->
+				<!--Blog Sidebar Widgets Column-->
 				<div class="col-md-4">
 
 
-					<!-- /.input-group -->
+					<!--/.input-group-->
 				</div>
 
 
 			</div>
 
 		</div>
-		<!-- /.row -->
+		<!--/.row-->
 
 		<hr>
 
-		<!-- Footer -->
-		<footer>
-		<div class="row">
+		<!--Footer-->
+
+		<div class="footer">
 			<div class="col-lg-12">
 				<p>CopyLeft &copy; KM Website 2017 By Kyungmin
 					InterneInformation</p>
 			</div>
 		</div>
-		<!-- /.row --> </footer>
+		<!--/.row-->
 
 	</div>
-	<!-- /.container -->
+	<!--/.container-->
 
-	<!-- jQuery -->
+	<!--jQuery-->
 	<script src="res/js/jquery.js"></script>
 
-	<!-- Bootstrap Core JavaScript -->
+	<!--Bootstrap Core JavaScript-->
 	<script src="res/js/bootstrap.min.js"></script>
 
 </body>
