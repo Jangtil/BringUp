@@ -26,10 +26,14 @@
 
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script>
+
+
 	window.onload = function() {
 		$(document)
 				.ready(
 						function() {
+							
+							
 							$("#btndel")
 									.click(
 											function() {
@@ -37,7 +41,7 @@
 													$("#frm").prop("method",
 															"POST");
 													$("#frm")
-															.attr(
+															.attr( 
 																	"action",
 																	"boardDelete?boardid=${board.id}&member_id=${board.member_id}&lectureid=${lectureid}");
 													$("#frm").submit();
@@ -206,6 +210,7 @@ html {
 
 	<!--Bootstrap Core JavaScript-->
 	<script src="res/js/bootstrap.min.js"></script>
+
 
 </body>
 
