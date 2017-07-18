@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mybatissample.mapper">
+
+	<select id="selectallboard" resultType="com.myweb.mybatis.domain.Board">
+		SELECT *
+		FROM board
+	</select>
+	<insert id="insertboard" parameterType="com.myweb.mybatis.domain.Board">
+		INSERT INTO
+		board(member_id,lecture_id,title,content)
+		VALUES
+		(#{member_id},#{lecture_id},#{title},#{content})
+	</insert>
+
+	<select id="selectBoardByName" resultType="com.myweb.mybatis.domain.Board"
+		parameterType="String">
+		SELECT id,member_id,lecture_id,title
+		FROM board
+		WHERE
+		lecture_id = (
+		SELECT id
+		FROM lecture as lec
+		WHERE lec.name LIKE
+		#{lecture})
+	</select>
+
+	<select id="selectBoardById" resultType="com.myweb.mybatis.domain.Board"
+		parameterType="Integer">
+		SELECT id,member_id,lecture_id,title,content,date
+		FROM
+		board
+		WHERE lecture_id=#{lecture_id}
+	</select>
+
+
+	<select id="selectContentById" resultType="com.myweb.mybatis.domain.Board"
+		parameterType="com.myweb.mybatis.domain.Board">
+		SELECT id,#{member_id} as member_id,lecture_id,title,content,date,
+		(SELECT
+		name
+		FROM lecture
+		WHERE lecture.id = board.lecture_id)as lecture,
+		(SELECT count
+		FROM reading as r
+		WHERE r.board_id=board.id
+		AND r.member_id =#{member_id} ) as count
+		FROM board
+		WHERE id = #{id}
+	</select>
+
+	<delete id="deleteBoardById" parameterType="com.myweb.mybatis.domain.DeleteBoard">
+		DELETE
+		FROM board
+		WHERE id=#{id} AND member_id=#{sessionid}
+	</delete>
+
+	<insert id="insertlecture" parameterType="com.myweb.mybatis.domain.Lecture">
+		INSERT into
+		lecture(`name`,`f_teach`,`code`)
+		VALUES (#{name},#{teach},#{code});
+	</insert>
+
+	<select id="countlecture" parameterType="String" resultType="Integer">
+		SELECT
+		COUNT(*)
+		FROM lecture
+		WHERE code=#{code}
+	</select>
+
+	<select id="countmylecture" parameterType="com.myweb.mybatis.domain.Mylecture"
+		resultType="Integer">
+		SELECT
+		COUNT(*)
+		FROM mylecture
+		WHERE f_member=#{id} AND
+		f_lecture=
+		(SELECT id FROM lecture WHERE code=#{code})
+	</select>
+
+	<select id="selmylecture" resultType="com.myweb.mybatis.domain.SelMylectures"
+		parameterType="String">
+		SELECT f_member as stdid,name as lecture,f_teach as
+		teach,code as lecturecode, f_lecture as lectureid
+		FROM mylecture as m ,
+		lecture as l
+		WHERE m.f_member=#{id}
+		AND m.`f_lecture` = l.`id`
+		ORDER BY
+		lectureid DESC
+	</select>
+
+
+	<select id="selectlecturebyid" resultType="com.myweb.mybatis.domain.Lecture"
+		parameterType="String">
+		SELECT id,name,f_teach as teach,code
+		FROM lecture
+		WHERE f_teach LIKE #{id}
+	</select>
+
+
+	<insert id="insertreading" parameterType="com.myweb.mybatis.domain.Reading">
+		INSERT INTO reading
+		(`board_id`, `member_id`, `count`) VALUES (#{board_id}, #{member_id},
+		1)
+		ON DUPLICATE KEY UPDATE `board_id`=#{board_id},
+		`member_id`=#{member_id}, `count`=`count`+1;
+	</insert>
+
+	<insert id="insertImage" parameterType="com.myweb.mybatis.domain.Image">
+		INSERT INTO
+		image(fsn,ofn)
+		VALUES (#{fsn},#{ofn})
+	</insert>
+	
+	<update id="editboard" parameterType="com.myweb.mybatis.domain.EditBoard">
+		UPDATE board b 
+		SET b.title=#{title},b.content=#{content}
+		WHERE b.id=#{id} AND b.member_id = #{sessionid}
+	</update>
+
+
+</mapper>

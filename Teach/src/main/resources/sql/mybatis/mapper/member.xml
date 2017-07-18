@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.mybatissample.mapper">
+
+	<select id="selectallmember" resultType="com.myweb.mybatis.domain.Member">
+		SELECT * 
+		FROM teach
+	</select>
+	<insert id="insertmember" parameterType="com.myweb.mybatis.domain.Member">
+		INSERT INTO teach(id,pw,name) 
+		VALUES (#{id},#{pw},#{name})
+	</insert>
+	
+	<select id="loginmember" parameterType="com.myweb.mybatis.domain.Member" resultType="Integer">
+		SELECT COUNT(*) AS res 
+		FROM teach 
+		WHERE id=#{id} AND pw=#{pw}
+	</select>
+	
+	<select id="selectMemberById" parameterType="String" resultType="com.myweb.mybatis.domain.Member">
+		SELECT * 
+		FROM teach 
+		WHERE id=#{id}
+	</select>
+	
+	<select id="idchk" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM teach
+		WHERE id=#{id}
+	</select>
+	
+	
+	<select id="chkreading" parameterType="com.myweb.mybatis.domain.Reading" resultType="Integer">
+		SELECT COUNT(*)
+		FROM reading
+		WHERE board_id=#{board_id} AND
+			member_id=#{member_id}
+	</select>
+	
+
+	
+	
+	
+	
+</mapper>
