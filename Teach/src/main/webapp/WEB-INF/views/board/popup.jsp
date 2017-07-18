@@ -86,7 +86,7 @@ button {
 		}
 	}
 	function insert_image(url) {
-		var img = "<img src='res/upload/"+url+"'>"
+		var img = "<img name='img' src='res/upload/"+url+"'>"
 		var tempImg = opener.tinymce.activeEditor.execCommand(
 				"mceInsertContent", 'false', img);
 		self.close();
