@@ -214,6 +214,29 @@ public class BoardController {
 		String id = (String) session.getAttribute("id");
 		if (id == null) {
 			return "redirect:login";
+		} else { // 로그인 됨
+			setTitle(model, id);
+
+			try {
+				// Reading 추가
+				Reading reading = new Reading();
+				reading.setBoard_id(boardid);
+				reading.setMember_id(id);
+
+				// Reading sql
+				boolean res = boarddao.insertReading(reading);
+
+				// parameterSetting
+				Board board = new Board();
+				board.setId(boardid);
+				board.setMember_id(id);
+
+				Board resboard = boarddao.selectContentById(board);
+
+				model.addAttribute("board", resboard);
+			} catch (Exception e) {
+				return "redirect:main?err=boardContentQuiz";
+			}
 		}
 
 		return "board/boardContentQuiz";
