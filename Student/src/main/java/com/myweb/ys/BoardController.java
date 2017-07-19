@@ -208,4 +208,15 @@ public class BoardController {
 		return "board/boardContent";
 	}
 
+
+	@RequestMapping(value = "/boardContentQuiz")
+	public String boardContentQuiz(HttpSession session, Model model, String title, Integer boardid) {
+		String id = (String) session.getAttribute("id");
+		if (id == null) {
+			return "redirect:login";
+		}
+
+		return "board/boardContentQuiz";
+	}
+	
 }
